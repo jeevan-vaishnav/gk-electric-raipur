@@ -53,6 +53,13 @@ async function main() {
       name: "version_code_unique",
     }
     );    
+    await db.collection("variants").createIndex(
+    { code: 1 },
+    {
+        unique: true,
+        name: "variant_code_unique",
+    }
+    );
     console.log("Indexes created");
 }
 
