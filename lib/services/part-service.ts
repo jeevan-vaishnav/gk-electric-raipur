@@ -64,12 +64,8 @@ export class PartService {
     return part;
   }
 
-  async update(
-    id: string,
-    data: unknown
-  ) {
-    const validated =
-      PartSchema.parse(data);
+  async update(id: string,data: unknown) {
+    const validated = PartSchema.parse(data);
 
     const partNumber =
       this.generator.generate({

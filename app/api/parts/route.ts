@@ -9,20 +9,16 @@ export async function POST(req: Request) {
     return NextResponse.json(result);
 }
 
-export async function GET(
-    req: Request
-) {
-    const { searchParams } =
-        new URL(req.url);
+export async function GET(req: Request) {
+    const { searchParams } = new URL(req.url);
 
     const search = searchParams.get("search");
-
+    
     if (search) {
         return NextResponse.json(
             await search.search(search)
         );
     }
-
 
     const data = await service.findAll();
     return NextResponse.json(data);
