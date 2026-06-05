@@ -2,7 +2,6 @@ import { FunctionMaster } from "@/types/function";
 import { getDb } from "../mongodb";
 
 export class FunctionRepository {
-
     async create(data:FunctionMaster){
         const db = await getDb();
         return db.collection<FunctionMaster>("functions").insertOne(data)

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 
 dotenv.config({
-  path: ".env.local",
+    path: ".env.local",
 });
 
 console.log("Loaded URI:", process.env.MONGODB_URI);
@@ -20,10 +20,33 @@ async function main() {
             unique: true,
             name: "groupCode_functionNo_unique",
         }
-        
+
     );
 
-      console.log("Indexes created");
+    await db.collection("systemGroups").createIndex(
+        { code: 1 },
+        {
+            unique: true,
+            name: "code_unique",
+        }
+    );
+    await db.collection("importIndigenous").createIndex(
+            { code: 1 },
+            {
+                unique: true,
+                name: "code_unique",
+            }
+        );
+
+    await db.collection("suppliers").createIndex(
+    { code: 1 },
+    {
+      unique: true,
+      name: "supplier_code_unique",
+    }
+    );
+        
+    console.log("Indexes created");
 }
 
 main().then(() => process.exit(0)).catch(console.error);
