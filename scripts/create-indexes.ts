@@ -45,7 +45,14 @@ async function main() {
       name: "supplier_code_unique",
     }
     );
-        
+    
+    await db.collection("versions").createIndex(
+    { code: 1 },
+    {
+      unique: true,
+      name: "version_code_unique",
+    }
+    );    
     console.log("Indexes created");
 }
 
