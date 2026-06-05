@@ -2,7 +2,14 @@ import { SupplierRepository } from "../repositories/supplier.repository";
 
 import { SupplierSchema } from "../zod/supplier.schema";
 
-export class SupplierService {
+export class SupplierService {delete(id: string) {
+      throw new Error("Method not implemented.");
+  }
+  update(id: string, body: any) {
+      throw new Error("Method not implemented.");
+  }
+
+  
   private repository = new SupplierRepository();
 
   async create(data: unknown) {
