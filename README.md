@@ -18,6 +18,7 @@ bun dev
 # important
 
 npm install framer-motion lucide-react zustand
+# ssh -p 443 -R0:localhost:3000 a.pinggy.io
 
 ```
 

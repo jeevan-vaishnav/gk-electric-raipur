@@ -1,5 +1,5 @@
 
-const ROUTE_LABELS: Record<string, string> = {
+export const ROUTE_LABELS: Record<string, string> = {
     dashboard: "Dashboard",
     masters: "Masters",
     "part-types": "Part Types",
