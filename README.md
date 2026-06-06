@@ -30,33 +30,6 @@ A modern Part Management System built with Next.js, TypeScript, MongoDB, and Tai
 | Framer Motion | Animations |
 | Lucide React | Icons |
 
----
-
-## 📂 Project Structure
-
-```text
-src/
-├── app/
-│   ├── api/
-│   │   ├── part-types/
-│   │   ├── system-groups/
-│   │   ├── suppliers/
-│   │   ├── functions/
-│   │   ├── variants/
-│   │   └── parts/
-│
-├── components/
-├── lib/
-│   └── mongodb.ts
-│
-├── types/
-├── hooks/
-├── store/
-└── utils/
-```
-
----
-
 ## ⚙️ Installation
 
 Clone the repository:
@@ -76,6 +49,10 @@ Additional packages:
 
 ```bash
 npm install framer-motion lucide-react zustand
+npm i @tanstack/react-query
+npm i @tabler/icons-react
+npm install @tanstack/react-table
+npm install recharts date-fns @tanstack/react-table
 ```
 
 ---

@@ -1,5 +1,5 @@
+import { DashboardModule } from "@/modules/dashboard/dashboard-module";
+
 export default function page() {
-    return (
-        <div>Dashbaord</div>
-    )
+    return <DashboardModule />
 }
