@@ -48,6 +48,7 @@ npm install
 Additional packages:
 
 ```bash
+tree -F app/modules > structure.txt
 npm install framer-motion lucide-react zustand
 npm i @tanstack/react-query
 npm i @tabler/icons-react

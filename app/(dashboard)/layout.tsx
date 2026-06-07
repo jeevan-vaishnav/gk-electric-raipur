@@ -1,5 +1,6 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { Metadata } from "next";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
     title: "Dashboard",
@@ -9,6 +10,7 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
     return (
         <AppShell>
             {children}
+            <Toaster />
         </AppShell>
     )
 }

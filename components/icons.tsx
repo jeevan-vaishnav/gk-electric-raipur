@@ -50,7 +50,8 @@ import {
     PlusSquare,
     TrendingUp,
     ArrowUpRight,
-    Badge
+    Badge,
+    Shapes
 } from "lucide-react";
 
 export type Icon = React.ComponentType<IconProps>;
@@ -104,6 +105,7 @@ export const Icons = {
     PlusSquare,
     TrendingUp,
     ArrowUpRight,
-    Badge
+    Badge,
+    Shapes
 };
 
