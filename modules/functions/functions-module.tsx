@@ -5,23 +5,22 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { usePartTypes } from "./hooks/use-part-types";
-import { partTypeColumns } from "./components/part-type-columns";
 import { useState } from "react";
-import { partTypeFormConfig } from "./components/config";
+import { functionFormConfig } from "./components/config";
 import { MasterDialog } from "@/components/masters/master-dialog";
-import type { PartTypeInput } from "@/lib/zod/part-type.schema";
-import { useCreatePartType } from "./hooks/use-create-part-type";
-import { PageLoader } from "@/components/shared/page-loader";
+import { useCreateFunctions } from "./hooks/use-functions-hooks";
+// import { PageLoader } from "@/components/shared/page-loader";
+import { functionColumns } from "./components/functions-columns"
+import type { FunctionInput } from "@/lib/zod/function.schema";
+import { useFunctions } from "./hooks/use-functions";
 
-
-export function PartTypesModule() {
-    const { data = [], isLoading } = usePartTypes();
+export function FunctionsModule() {
+    const { data = [], isLoading } = useFunctions();
     const [open, setOpen] = useState(false);
 
-    const createMutation = useCreatePartType();
+    const createMutation = useCreateFunctions();
 
-    const createPartType = (data: PartTypeInput) => {
+    const createFunctionsType = (data: FunctionInput) => {
         createMutation.mutate(data);
         setOpen(false);
     };
@@ -34,13 +33,13 @@ export function PartTypesModule() {
         <>
             <div className="p-6 space-y-6">
                 <PageHeader
-                    title="Part Types"
-                    description="Manage all part type masters."
+                    title="Functions"
+                    description="Manage all Functions masters."
                     actions={
                         <Button asChild onClick={() => setOpen(true)}>
                             <Link href={""}>
                                 <Icons.PlusSquare className="mr-2 h-4 w-4" />
-                                Add Part Type
+                                Add Functions
                             </Link>
                         </Button>
                     }
@@ -51,7 +50,7 @@ export function PartTypesModule() {
                             <Icons.Shapes className="h-8 w-8 text-primary" />
                             <div>
                                 <p className="text-sm text-muted-foreground">
-                                    Total Types
+                                    Total Functions
                                 </p>
 
                                 <p className="text-2xl font-bold">
@@ -68,17 +67,17 @@ export function PartTypesModule() {
                     <Card><CardContent className="p-5">
                         <div className="text-xs text-muted-foreground uppercase tracking-wider">Last Updated</div>
                         <div className="text-2xl font-semibold mt-1">Today</div>
-                        <div className="text-xs text-muted-foreground mt-1">Synced with parts catalog</div>
+                        <div className="text-xs text-muted-foreground mt-1">Synced with funtion catalog</div>
                     </CardContent></Card>
 
                 </div>
                 <Card>
                     <CardContent className="p-6">
                         <DataTable
-                            columns={partTypeColumns}
+                            columns={functionColumns}
                             data={data}
                             isLoading={isLoading}
-                            searchPlaceholder="Search part types..."
+                            searchPlaceholder="Search funtion number..."
                         />
                     </CardContent>
                 </Card>
@@ -86,11 +85,10 @@ export function PartTypesModule() {
                 <MasterDialog
                     open={open}
                     onOpenChange={setOpen}
-                    title="Create Part Type"
-                    fields={partTypeFormConfig}
-                    onSubmit={createPartType}
+                    title="Create Functions"
+                    fields={functionFormConfig}
+                    onSubmit={createFunctionsType}
                     isSubmitting={createMutation.isPending}
-
                 />
             </div>
         </>

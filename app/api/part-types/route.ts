@@ -22,3 +22,16 @@ export async function POST(req: Request) {
     );
   }
 }
+
+export async function GET() {
+  try {
+    const result = await service.findAll();
+    return NextResponse.json(result)
+  } catch (error) {
+    return NextResponse.json({
+      message: error instanceof Error ? error.message : "Error"
+    },
+      { status: 400 }
+    )
+  }
+}

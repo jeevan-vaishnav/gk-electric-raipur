@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 
-export function usePartTypes() {
+export function useFunctions() {
     return useQuery({
-        queryKey: ['part-types'],
+        queryKey: ['functions'],
         queryFn: async () => {
-            const res = await fetch("/api/part-types");
+            const res = await fetch("/api/functions");
             console.log(res);
             if (!res.ok) {
-                throw new Error("Failed to fetch part types")
+                throw new Error("Failed to fetch funtions")
             }
             return res.json()
         }

@@ -1,6 +1,18 @@
-import { FormField } from "@/components/forms/dynamic-form";
+// modules/part-types/types/part-type.ts
 
-export const functionFormConfig  : FormField[]= [
+import { ObjectId } from "mongodb";
+
+export interface FunctionType {
+    _id?: ObjectId;
+    functionNo: string;
+    groupName:string;
+    groupCode: string;
+    name: string;
+    description?: string;
+    active: boolean;
+}
+
+export const functionFields = [
     {
         name: "functionNo",
         label: "Function Number",
@@ -8,16 +20,16 @@ export const functionFormConfig  : FormField[]= [
         placeholder: "1",
     },
     {
-        name: "groupCode",
-        label: "Group Code",
-        type: "text" as const,
-        placeholder: "BAT",
-    },
-    {
         name: "groupName",
         label: "Group Name",
         type: "text" as const,
         placeholder: "Battery System",
+    },
+    {
+        name: "groupCode",
+        label: "Group Code",
+        type: "text" as const,
+        placeholder: "BAT",
     },
     {
         name: "name",
@@ -29,6 +41,6 @@ export const functionFormConfig  : FormField[]= [
         name: "description",
         label: "Description",
         type: "textarea" as const,
-        placeholder: "Enter description",
+        placeholder: "Enter function description",
     },
 ];

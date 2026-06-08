@@ -12,7 +12,7 @@ export class FunctionRepository {
         return db.collection<FunctionMaster>("functions").find({}).toArray()
     }
 
-    async findByFuntionNo(functionNo:number){
+    async findByFuntionNo(functionNo:string){
         const db = await getDb();
         return db.collection<FunctionMaster>("functions").findOne({functionNo}) 
     }

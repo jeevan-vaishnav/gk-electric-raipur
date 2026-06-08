@@ -7,13 +7,12 @@ export class PartTypeService {
   private repository = new PartTypeRepository();
 
   async create(data: unknown) {
-  
+
     const validated = PartTypeSchema.parse(data);
 
-    const existing =
-      await this.repository.findByCode(
-        validated.code
-      );
+    const existing = await this.repository.findByCode(
+      validated.code
+    );
 
     if (existing) {
       throw new Error(
@@ -21,12 +20,17 @@ export class PartTypeService {
       );
     }
 
-    const partType : PartType = {
+    const partType: PartType = {
       ...validated,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }
 
     return this.repository.create(partType);
   }
+
+  async findAll() {
+    return this.repository.findAll()
+  }
+
 }
