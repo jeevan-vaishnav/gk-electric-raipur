@@ -14,6 +14,7 @@ import {
     DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { ModeToggle } from "./ThemeToggle/theme-toggle";
 
 // import { useAuth } from "@/lib/auth-context";
 
@@ -65,10 +66,11 @@ export function AppHeader() {
                     <Input placeholder="Search parts, masters..." className="pl-9 w-72" />
                 </div>
 
-                <Button variant="ghost" size="icon" className="relative" >
+                <Button variant="ghost" size="icon" className="relative hidden" >
                     <Bell className="h-4 w-4" />
                     <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
                 </Button>
+                  <ModeToggle />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <button className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-md hover:bg-accent transition-colors">

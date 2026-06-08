@@ -32,6 +32,7 @@ export function LoginForm() {
     });
 
     const onSubmit = async (data: LoginFormValues) => {
+        
         const result = await signIn('credentials', {
             redirect: false,
             email: data.email,
@@ -43,8 +44,7 @@ export function LoginForm() {
             return
         }
 
-        router.push("/admin/dashboard")
-
+        router.push("/dashboard")
     };
 
     return (

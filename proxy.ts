@@ -6,6 +6,10 @@ export async function proxy(req: NextRequest) {
     const token = await getToken({ req })
     const { pathname } = req.nextUrl
 
+    // public auth routes
+    if (pathname.startsWith("/api/auth")) {
+        return NextResponse.next();
+    }
 
     if (pathname.startsWith("/api")) {
         if (!token) {
@@ -44,5 +48,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/admin/:path*", "/login", "/register", "/not-authorized", "/api/:path*"],
+    matcher: ["/dashboard/:path*", "/login", "/register", "/not-authorized", "/api/:path*"],
 }
