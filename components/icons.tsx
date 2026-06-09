@@ -51,7 +51,8 @@ import {
     TrendingUp,
     ArrowUpRight,
     Badge,
-    Shapes
+    Shapes,
+    GitBranch
 } from "lucide-react";
 
 export type Icon = React.ComponentType<IconProps>;
@@ -106,6 +107,7 @@ export const Icons = {
     TrendingUp,
     ArrowUpRight,
     Badge,
-    Shapes
+    Shapes,
+    GitBranch
 };
 

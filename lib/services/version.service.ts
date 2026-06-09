@@ -10,9 +10,7 @@ export class VersionService {
   async create(data: unknown) {
     
     const validated = VersionSchema.parse(data);
-
-    const existing =
-      await this.repository.findByCode(validated.code);
+    const existing = await this.repository.findByCode(validated.code);
 
     if (existing) {
       throw new Error(
