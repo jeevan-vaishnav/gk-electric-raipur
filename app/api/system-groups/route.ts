@@ -9,12 +9,9 @@ export async function POST(
     try {
         const body = await req.json();
 
-        const result =
-            await service.create(body);
+        const result = await service.create(body);
 
-        return NextResponse.json(
-            result
-        );
+        return NextResponse.json(result);
     } catch (error) {
         return NextResponse.json(
             {
@@ -32,9 +29,7 @@ export async function POST(
 
 export async function GET() {
     try {
-        const data =
-            await service.findAll();
-
+        const data = await service.findAll();
         return NextResponse.json(data);
     } catch (error) {
         return NextResponse.json(

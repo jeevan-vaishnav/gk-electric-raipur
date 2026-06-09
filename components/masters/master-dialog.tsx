@@ -34,6 +34,8 @@ export function MasterDialog({ isSubmitting, open, onOpenChange, title, fields, 
                     defaultValues={defaultValues}
                     title={title}
                     isSubmitting={isSubmitting}
+                    requireConfirmation
+                    confirmationMessage={`Are you sure you want to create this ${title}?`}
                 />
             </DialogContent>
         </Dialog>

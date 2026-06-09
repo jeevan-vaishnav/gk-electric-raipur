@@ -6,10 +6,7 @@ import { OptionalId } from "mongodb";
 export class SystemGroupRepository {
     async create(data: OptionalId<SystemGroup>) {
         const db = await getDb();
-
-        return db
-            .collection<SystemGroup>("systemGroups")
-            .insertOne(data);
+        return db.collection<SystemGroup>("systemGroups").insertOne(data);
     }
     
     async findByCode(code: string) {

@@ -5,19 +5,11 @@ export class SystemGroupService {
     private repository = new SystemGroupRepository();
 
     async create(data: unknown) {
-        const validated =
-            SystemGroupSchema.parse(data);
+        
+        const validated = SystemGroupSchema.parse(data);
+        const existing = await this.repository.findByCode(validated.code);
 
-        const existing =
-            await this.repository.findByCode(
-                validated.code
-            );
-
-        if (existing) {
-            throw new Error(
-                "System group code already exists"
-            );
-        }
+        if (existing) {throw new Error("System group code already exists")}
 
         return this.repository.create({
             ...validated,
@@ -26,7 +18,5 @@ export class SystemGroupService {
         });
     }
 
-    async findAll() {
-        return this.repository.findAll();
-    }
+    async findAll() { return this.repository.findAll()}
 }

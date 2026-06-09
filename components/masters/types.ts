@@ -11,4 +11,7 @@ export interface MasterFormProps {
     defaultValues?: Record<string, any>;
     onSubmit: (data: any) => void;
     isSubmitting?: boolean;
+
+    requireConfirmation?: boolean;
+    confirmationMessage?: string;
 }
