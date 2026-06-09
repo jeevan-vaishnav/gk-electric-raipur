@@ -15,19 +15,24 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { ModeToggle } from "./ThemeToggle/theme-toggle";
-
-// import { useAuth } from "@/lib/auth-context";
-
+import { useSession, signOut } from "next-auth/react";
 
 export function AppHeader() {
     const pathname = usePathname();
 
-    // const { user, signOut } = useAuth();
-    // const handleSignOut = async () => {
-    //     await signOut
-    // }
-    const user = { email: "" }
-    const initials = (user?.email ?? "G").slice(0, 2).toUpperCase();
+    const { data: session } = useSession();
+    const user = session?.user;
+
+    const handleSignOut = async () => {
+        await signOut({
+            callbackUrl: "/login",
+        })
+    }
+    const initials =
+        user?.name?.slice(0, 2).toUpperCase() ||
+        user?.email?.slice(0, 2).toUpperCase() ||
+        "GK";
+
     const segments = pathname.split("/").filter(Boolean);
 
     return (
@@ -70,7 +75,7 @@ export function AppHeader() {
                     <Bell className="h-4 w-4" />
                     <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
                 </Button>
-                  <ModeToggle />
+                <ModeToggle />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <button className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-md hover:bg-accent transition-colors">
@@ -78,16 +83,16 @@ export function AppHeader() {
                                 <AvatarFallback className="bg-primary text-primary-foreground text-xs">{initials}</AvatarFallback>
                             </Avatar>
                             <div className="text-left hidden sm:block">
-                                {/* <div className="text-xs font-medium leading-tight">
-                                    {user?.user_metadata?.name ?? user?.email?.split("@")[0]}
-                                </div> */}
-                                <div className="text-[10px] text-muted-foreground">Administrator</div>
+                                <div className="text-xs font-medium leading-tight">
+                                    {user?.name}
+                                </div>
                             </div>
                             <ChevronDown className="h-3.5 w-3.5 text-muted-foreground hidden sm:block" />
                         </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-56">
                         <DropdownMenuLabel>
+
                             <div className="font-medium text-sm">{user?.email}</div>
                             <div className="text-xs text-muted-foreground font-normal mt-0.5">GK E-Vehicle Industries</div>
                         </DropdownMenuLabel>
@@ -104,8 +109,8 @@ export function AppHeader() {
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                            // onClick={handleSignOut} 
-                            className="text-destructive focus:text-destructive">
+                            onClick={handleSignOut}
+                            className="text-destructive focus:text-destructive cursor-pointer">
                             <LogOut className="h-4 w-4 mr-2" /> Sign out
                         </DropdownMenuItem>
                     </DropdownMenuContent>

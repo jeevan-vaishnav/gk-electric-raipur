@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 const META_THEME_COLORS = {
     light: '#ffffff',
     dark: '#09090b'
-
 };
 export const metadata: Metadata = {
     title: "Dashboard",

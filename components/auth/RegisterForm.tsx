@@ -174,8 +174,8 @@ export function RegisterForm() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="admin">Admin</SelectItem>
-                                    <SelectItem value="admin">Service</SelectItem>
-                                    <SelectItem value="editor">Parts</SelectItem>
+                                    <SelectItem value="production">Production</SelectItem>
+                                    <SelectItem value="npd">NPD</SelectItem>
                                 </SelectContent>
                             </Select>
                         )}
