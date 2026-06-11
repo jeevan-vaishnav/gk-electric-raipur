@@ -1,159 +1,172 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ChevronDown, ChevronLeft } from "lucide-react";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { useSidebarStore } from "@/stores/sidebar.store";
-import { cn } from "@/lib/utils";
-import { NAVIGATION } from "./navigation";
+'use client';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
+    SidebarRail
+} from '@/components/ui/sidebar';
+import { UserAvatarProfile } from '@/components/user-avatar-profile';
+import { navGroups } from '@/config/nav-config';
+import { useMediaQuery } from '@/hooks/use-media-query';
+import { useFilteredNavGroups } from '@/hooks/use-nav';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import * as React from 'react';
+import { Icons } from '../icons';
+// import { OrgSwitcher } from '../org-switcher';
 
-export function AppSidebar() {
+export default function AppSidebar() {
     const pathname = usePathname();
+    const { isOpen } = useMediaQuery();
+    // const { user } = useUser();
+    // const { organization } = useOrganization();
+    const router = useRouter();
+    const filteredGroups = useFilteredNavGroups(navGroups);
 
-    const { collapsed, toggle } =
-        useSidebarStore();
-
-    const [openMenus, setOpenMenus] =
-        useState<Record<string, boolean>>({
-            Masters: true,
-            Parts: true,
-        });
+    React.useEffect(() => {
+        // Side effects based on sidebar state changes
+    }, [isOpen]);
 
     return (
-        <motion.aside
-            animate={{
-                width: collapsed ? 70 : 260,
-            }}
-            className="border-r bg-background h-screen sticky top-0"
-        >
-            <div className="h-16 border-b flex items-center px-4">
-                <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-bold">
-                        GK
-                    </div>
-
-                    {!collapsed && (
-                        <div>
-                            <h2 className="font-semibold">
-                                GK Electric
-                            </h2>
-                            <p className="text-xs text-muted-foreground">
-                                ERP
-                            </p>
-                        </div>
-                    )}
-                </div>
-            </div>
-
-            <nav className="p-2 space-y-1">
-                {NAVIGATION.map((item) => {
-                    if ("href" in item) {
-                        const Icon = item.icon;
-
-                        return (
-                            <Link
-                                key={item.href}
-                                href={item.href!}
-                                className={cn(
-                                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent",
-                                    pathname === item.href &&
-                                    "bg-accent"
-                                )}
+        <Sidebar collapsible='icon'>
+            <SidebarHeader className='group-data-[collapsible=icon]:pt-4'>
+                {/* <OrgSwitcher /> */}
+                {/* hi */}
+            </SidebarHeader>
+            <SidebarContent className='overflow-x-hidden'>
+                {filteredGroups.map((group) => (
+                    <SidebarGroup key={group.label || 'ungrouped'} className='py-0'>
+                        {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
+                        <SidebarMenu>
+                            {group.items.map((item) => {
+                                const Icon = item.icon ? Icons[item.icon] : Icons.logo;
+                                return item?.items && item?.items?.length > 0 ? (
+                                    <Collapsible
+                                        key={item.title}
+                                        asChild
+                                        defaultOpen={item.isActive}
+                                        className='group/collapsible'
+                                    >
+                                        <SidebarMenuItem>
+                                            <CollapsibleTrigger asChild>
+                                                <SidebarMenuButton
+                                                    tooltip={item.title}
+                                                    isActive={pathname === item.url}>
+                                                    {item.icon && <Icon />}
+                                                    <span>{item.title}</span>
+                                                    <Icons.chevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
+                                                </SidebarMenuButton>
+                                            </CollapsibleTrigger>
+                                            <CollapsibleContent>
+                                                <SidebarMenuSub>
+                                                    {item.items?.map((subItem) => (
+                                                        <SidebarMenuSubItem key={subItem.title}>
+                                                            <SidebarMenuSubButton asChild isActive={pathname === subItem.url}>
+                                                                <Link href={subItem.url}>
+                                                                    <span>{subItem.title}</span>
+                                                                </Link>
+                                                            </SidebarMenuSubButton>
+                                                        </SidebarMenuSubItem>
+                                                    ))}
+                                                </SidebarMenuSub>
+                                            </CollapsibleContent>
+                                        </SidebarMenuItem>
+                                    </Collapsible>
+                                ) : (
+                                    <SidebarMenuItem key={item.title}>
+                                        <SidebarMenuButton
+                                            asChild
+                                            tooltip={item.title}
+                                            isActive={pathname === item.url}
+                                        >
+                                            <Link href={item.url}>
+                                                <Icon />
+                                                <span>{item.title}</span>
+                                            </Link>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+                                );
+                            })}
+                        </SidebarMenu>
+                    </SidebarGroup>
+                ))}
+            </SidebarContent>
+            <SidebarFooter>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <SidebarMenuButton
+                                    size='lg'
+                                    className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
+                                >
+                                    {/* {user && (
+                                        <UserAvatarProfile className='h-8 w-8 rounded-lg' showInfo user={user} />
+                                    )} */}
+                                    <Icons.chevronsDown className='ml-auto size-4' />
+                                </SidebarMenuButton>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                                className='w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg'
+                                side='bottom'
+                                align='end'
+                                sideOffset={4}
                             >
-                                <Icon className="h-4 w-4" />
-
-                                {!collapsed && (
-                                    <span>{item.title}</span>
-                                )}
-                            </Link>
-                        );
-                    }
-
-                    const Icon = item.icon;
-
-                    return (
-                        <div key={item.title}>
-                            <button
-                                className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md hover:bg-accent"
-                                onClick={() =>
-                                    setOpenMenus((prev) => ({
-                                        ...prev,
-                                        [item.title]:
-                                            !prev[item.title],
-                                    }))
-                                }
-                            >
-                                <Icon className="h-4 w-4" />
-
-                                {!collapsed && (
-                                    <>
-                                        <span className="flex-1 text-left">
-                                            {item.title}
-                                        </span>
-
-                                        <ChevronDown
-                                            className={cn(
-                                                "h-4 w-4 transition",
-                                                openMenus[item.title] &&
-                                                "rotate-180"
-                                            )}
-                                        />
-                                    </>
-                                )}
-                            </button>
-
-                            {!collapsed &&
-                                openMenus[item.title] && (
-                                    <div className="ml-5 mt-1 space-y-1 border-l pl-3">
-                                        {item.children.map(
-                                            (child) => {
-                                                const ChildIcon =
-                                                    child.icon;
-
-                                                return (
-                                                    <Link
-                                                        key={child.href}
-                                                        href={child.href}
-                                                        className={cn(
-                                                            "flex items-center gap-2 rounded-md px-2 py-2 text-sm hover:bg-accent",
-                                                            pathname ===
-                                                            child.href &&
-                                                            "bg-accent"
-                                                        )}
-                                                    >
-                                                        <ChildIcon className="h-4 w-4" />
-
-                                                        {child.title}
-                                                    </Link>
-                                                );
-                                            }
+                                {/* <DropdownMenuLabel className='p-0 font-normal'>
+                                    <div className='px-1 py-1.5'>
+                                        {user && (
+                                            <UserAvatarProfile className='h-8 w-8 rounded-lg' showInfo user={user} />
                                         )}
                                     </div>
-                                )}
-                        </div>
-                    );
-                })}
-            </nav>
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator /> */}
 
-            <div className="absolute bottom-3 left-0 right-0 px-2">
-                <button
-                    onClick={toggle}
-                    className="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent"
-                >
-                    <ChevronLeft
-                        className={cn(
-                            "h-4 w-4 transition",
-                            collapsed &&
-                            "rotate-180"
-                        )}
-                    />
-
-                    {!collapsed && (
-                        <span>Collapse</span>
-                    )}
-                </button>
-            </div>
-        </motion.aside>
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem onClick={() => router.push('/dashboard/profile')}>
+                                        <Icons.account className='mr-2 h-4 w-4' />
+                                        Profile
+                                    </DropdownMenuItem>
+                                    {/* {organization && (
+                                        <DropdownMenuItem onClick={() => router.push('/dashboard/billing')}>
+                                            <Icons.creditCard className='mr-2 h-4 w-4' />
+                                            Billing
+                                        </DropdownMenuItem>
+                                    )} */}
+                                    {/* <DropdownMenuItem onClick={() => router.push('/dashboard/notifications')}>
+                                        <Icons.notification className='mr-2 h-4 w-4' />
+                                        Notifications
+                                    </DropdownMenuItem> */}
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                                {/* <DropdownMenuItem>
+                                    <Icons.logout className='mr-2 h-4 w-4' />
+                                    <SignOutButton redirectUrl='/auth/sign-in' />
+                                </DropdownMenuItem> */}
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarFooter>
+            <SidebarRail />
+        </Sidebar>
     );
 }

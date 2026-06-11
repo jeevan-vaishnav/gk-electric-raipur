@@ -22,10 +22,10 @@ export const NAVIGATION = [
     {
         title: "Parts",
         icon: Boxes,
-        children: [
-            { href: "/dashboard/parts/new", title: "Create Part", icon: PlusSquare },
-            { href: "/dashboard/parts", title: "Part List", icon: Boxes },
-        ],
+        href:"/dashboard/parts"
+        // children: [
+        //     { href: "/dashboard/parts", title: "Create Part", icon: PlusSquare },
+        // ],
     },
     { href: "/dashboard/reports", title: "Reports", icon: FileBarChart },
     { href: "/dashboard/settings", title: "Settings", icon: SettingsIcon },
