@@ -72,11 +72,15 @@ import {
   TagIcon,
   BoxIcon,
   Slash,
+  TrendingUpIcon,
+  TrendingDownIcon,
+  AlertCircle,
 } from "lucide-react";
 
 export type Icon = React.ComponentType<IconProps>;
 
 export const Icons = {
+  alertCircle:AlertCircle,
   slash:Slash,
   creditCard: IconCreditCard,
   wallet: IconWallet,
@@ -163,6 +167,8 @@ export const Icons = {
   factory:FactoryIcon,
   gitBranch:GitBranchIcon,
   tag:TagIcon,
-  boxes:BoxIcon
+  boxes:BoxIcon,
+  trendingUp:TrendingUpIcon,
+  trendingDown:TrendingDownIcon
 
 };

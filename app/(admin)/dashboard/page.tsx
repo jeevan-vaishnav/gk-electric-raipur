@@ -1,5 +1,6 @@
-import { DashboardModule } from "@/modules/dashboard/dashboard-module";
 
-export default function page() {
-    return <DashboardModule />
+
+import { redirect } from "next/navigation";
+export default function Dashboard() {
+    redirect("/dashboard/overview");
 }
