@@ -312,3 +312,74 @@ export const partInfoContent: InfobarContent = {
         },
     ],
 };
+export const functionInfoContent: InfobarContent = {
+    title: "Function Management",
+    sections: [
+        {
+            title: "Overview",
+            description:
+                "The Functions module is used to define and manage functional groups used in part number generation. Functions represent the purpose or operation performed by a component within a system.",
+            links: [
+                {
+                    title: "Function Management Guide",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Creating Functions",
+            description:
+                "Click the 'Add Function' button to create a new function. Each function requires a unique function number and a descriptive name that clearly identifies its purpose.",
+            links: [
+                {
+                    title: "Function Creation Guide",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Function Number Structure",
+            description:
+                "Function numbers are unique identifiers used as part of the part numbering system. They help classify components based on their operational role within the machine or system.",
+            links: [
+                {
+                    title: "Function Numbering Standard",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Editing Functions",
+            description:
+                "Existing functions can be updated whenever business or engineering requirements change. Changes are reflected throughout the system where the function is referenced.",
+            links: [
+                {
+                    title: "Function Update Process",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Function Fields",
+            description:
+                "Each function contains a Function Number, Function Name, Description, and Status. These fields help maintain consistency and traceability across all parts.",
+            links: [
+                {
+                    title: "Function Fields Documentation",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Part Number Dependency",
+            description:
+                "Functions are one of the key master records used during part number generation. A function must be configured before it can be selected while creating a part.",
+            links: [
+                {
+                    title: "Part Number Configuration Guide",
+                    url: "#",
+                },
+            ],
+        },
+    ],
+};

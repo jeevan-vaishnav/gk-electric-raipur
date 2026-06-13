@@ -33,10 +33,21 @@ import { usePathname, useRouter } from 'next/navigation';
 import * as React from 'react';
 import { Icons } from '../icons';
 // import { OrgSwitcher } from '../org-switcher';
-
+import { useSession, signOut } from 'next-auth/react';
+import { Button } from '../ui/button';
 export default function AppSidebar() {
     const pathname = usePathname();
     const { isOpen } = useMediaQuery();
+
+    const { data: session } = useSession();
+    const user = session?.user
+
+    const handleSignOut = async () => {
+        await signOut({
+            callbackUrl: "/login",
+        })
+    }
+
     // const { user } = useUser();
     // const { organization } = useOrganization();
     const router = useRouter();
@@ -119,9 +130,10 @@ export default function AppSidebar() {
                                     size='lg'
                                     className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
                                 >
-                                    {/* {user && (
+                                    {user && (
+
                                         <UserAvatarProfile className='h-8 w-8 rounded-lg' showInfo user={user} />
-                                    )} */}
+                                    )}
                                     <Icons.chevronsDown className='ml-auto size-4' />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>
@@ -131,14 +143,14 @@ export default function AppSidebar() {
                                 align='end'
                                 sideOffset={4}
                             >
-                                {/* <DropdownMenuLabel className='p-0 font-normal'>
+                                <DropdownMenuLabel className='p-0 font-normal'>
                                     <div className='px-1 py-1.5'>
                                         {user && (
                                             <UserAvatarProfile className='h-8 w-8 rounded-lg' showInfo user={user} />
                                         )}
                                     </div>
                                 </DropdownMenuLabel>
-                                <DropdownMenuSeparator /> */}
+                                <DropdownMenuSeparator />
 
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem onClick={() => router.push('/dashboard/profile')}>
@@ -151,16 +163,23 @@ export default function AppSidebar() {
                                             Billing
                                         </DropdownMenuItem>
                                     )} */}
-                                    {/* <DropdownMenuItem onClick={() => router.push('/dashboard/notifications')}>
+                                    <DropdownMenuItem 
+                                    // onClick={() => router.push('/dashboard/notifications')}
+                                    >
                                         <Icons.notification className='mr-2 h-4 w-4' />
                                         Notifications
-                                    </DropdownMenuItem> */}
+                                    </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
-                                {/* <DropdownMenuItem>
-                                    <Icons.logout className='mr-2 h-4 w-4' />
-                                    <SignOutButton redirectUrl='/auth/sign-in' />
-                                </DropdownMenuItem> */}
+                                <DropdownMenuItem asChild>
+                                    <Button variant="outline" onClick={handleSignOut} className="w-full cursor-pointer">
+                                        <Icons.logout className='mr-2 h-4 w-4' />
+                                         Sign Out
+                                    </Button>
+                                    {/* <Icons.logout className='mr-2 h-4 w-4' />
+                                    
+                                    <SignOutButton redirectUrl='/auth/sign-in' /> */}
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </SidebarMenuItem>

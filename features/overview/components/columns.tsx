@@ -1,5 +1,5 @@
 import { type ColumnDef } from "@tanstack/react-table";
-import type { RecentPart } from "@/modules/overview/types/dashboard";
+import type { RecentPart } from "@/features/overview/types/dashboard";
 import { useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";

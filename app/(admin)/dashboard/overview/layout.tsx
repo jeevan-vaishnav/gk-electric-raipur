@@ -4,8 +4,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardHeader, CardTitle, CardDescription, CardAction, CardFooter } from '@/components/ui/card';
 import { Icons } from '@/components/icons';
 import React from 'react';
-import { StatCard } from '@/modules/overview/components/stat-card';
-import { DashboardResponse } from '@/modules/overview/types/dashboard';
+import { StatCard } from '@/features/overview/components/stat-card';
+import { DashboardResponse } from '@/features/overview/types/dashboard';
 import { useQuery } from '@tanstack/react-query';
 
 export default function OverViewLayout({ bar_stats }: {

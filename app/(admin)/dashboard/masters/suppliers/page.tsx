@@ -1,4 +1,4 @@
-import { SuppliersModule } from "@/modules/suppliers/suppliers-module";
+import { SuppliersModule } from "@/features/suppliers/suppliers-module";
 
 export default function page(){
     return <SuppliersModule />

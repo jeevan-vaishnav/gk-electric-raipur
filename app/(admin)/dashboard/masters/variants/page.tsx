@@ -1,4 +1,4 @@
-import { VariantsModule } from "@/modules/variants/variants-module";
+import { VariantsModule } from "@/features/variants/variants-module";
 
 export default function page(){
     return <VariantsModule />

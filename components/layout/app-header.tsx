@@ -9,9 +9,7 @@ import { usePathname } from "next/navigation";
 import { ROUTE_LABELS } from "./route-labels";
 import { navigate } from "next/dist/client/components/segment-cache/navigation";
 import { Avatar, AvatarFallback } from "../ui/avatar";
-import {
-    DropdownMenu, DropdownMenuContent, DropdownMenuItem,
-    DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem,DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { ModeToggle } from "./ThemeToggle/theme-toggle";

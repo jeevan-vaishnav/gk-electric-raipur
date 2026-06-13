@@ -42,6 +42,7 @@ import {
   IconReportMoney,
   IconBrightness,
   IconNotification,
+  IconAdjustments,
 } from "@tabler/icons-react";
 
 import {
@@ -75,11 +76,28 @@ import {
   TrendingUpIcon,
   TrendingDownIcon,
   AlertCircle,
+  CircleCheck,
+  XCircle,
+  Text,
+  ChevronsLeft,
+  EyeOff,
+  Calendar,
+  PlusCircle,
+  Edit,
 } from "lucide-react";
 
 export type Icon = React.ComponentType<IconProps>;
 
 export const Icons = {
+  edit:Edit,
+  plusCircle:PlusCircle,
+  calendar:Calendar,
+  eyeOff:EyeOff,
+  chevronsLeft:ChevronsLeft,
+  adjustments:IconAdjustments,
+  text:Text,
+  circleCheck:CircleCheck,
+  xCircle:XCircle,
   alertCircle:AlertCircle,
   slash:Slash,
   creditCard: IconCreditCard,
